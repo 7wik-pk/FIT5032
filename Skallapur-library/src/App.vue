@@ -1,10 +1,13 @@
 <script setup>
 // import JSON from './components/JSON.vue'
+import BHeader from './components/BHeader.vue';
 import Form from './components/Form.vue';
 </script>
 
 <template>
-  <header></header>
+  <header>
+    <BHeader />
+  </header>
 
   <main>
     <!-- <JSON /> -->

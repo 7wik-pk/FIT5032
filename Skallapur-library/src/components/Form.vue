@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="text-center">User Information Form</h1>
+        <h1 class="text-center">W5. Library Registration Form</h1>
 
         <hr>
 
@@ -19,10 +19,40 @@
               </div>
 
               <div class="col-sm-6">
+
+                <label for="gender" class="form-label">Gender</label><br>
+                <select class="form-select" id="gender" v-model="formData.gender" required>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6">
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" v-model="formData.password"
                 @blur="validatePassword(true)" @input="validatePassword(false)">
                 <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
+              </div>
+
+              <div class="col-sm-6 mb-3">
+                <label for="confirm-password" class="form-label">Confirm password:</label>
+
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirm-password"
+                    name="confirm-password"
+                    v-model="formData.confirmPassword"
+                    @blur="validateConfirmPassword(true)" @input="validateConfirmPassword(false)"
+                  >
+
+                <div v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword }}</div>
               </div>
 
             </div>
@@ -36,22 +66,15 @@
                 </div>
               </div>
 
-              <div class="col-sm-6">
-
-                <label for="gender" class="form-label">Gender</label><br>
-                <select class="form-select" id="gender" v-model="formData.gender">
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                    <option value="other">Other</option>
-                </select>
-
-              </div>
-
             </div>
 
             <div class="mb-3">
               <label for="reason" class="form-label">Reason For Joining:</label>
               <textarea id="reason" rows="3" class="form-control" v-model="formData.reason"></textarea>
+            </div>
+
+            <div v-if="reasonHasFriend()" class="div mb-3">
+              <div class="text" style="color: green;">it is great to have a friend.</div>
             </div>
 
             <div id="buttons" >
@@ -98,6 +121,7 @@
   const formData = ref({
       username: '',
       password: '',
+      confirmPassword: '',
       isAustralian: false,
       reason: '',
       gender: ''
@@ -109,6 +133,7 @@
     formData.value = {
       username: '',
       password: '',
+      confirmPassword: '',
       isAustralian: false,
       reason: '',
       gender: ''
@@ -119,6 +144,7 @@
 
     username: null,
     password: null,
+    confirmPassword: null,
     isAustralian: null,
     reason: null,
     gender: null,
@@ -131,6 +157,10 @@
     } else {
       errors.value.username = null;
     }
+  };
+
+  const reasonHasFriend = () => {
+    return formData.value.reason.toLowerCase().includes('friend');
   };
 
   const validatePassword = (blur) => {
@@ -153,6 +183,15 @@
       if (blur) errors.value.password = "Password must contain at least one special character.";
     } else {
       errors.value.password = null;
+    }
+
+  };
+
+  const validateConfirmPassword = (blur) => {
+    if (formData.value.password !== formData.value.confirmPassword) {
+      if (blur) errors.value.confirmPassword = 'Passwords do not match.'
+    } else {
+      errors.value.confirmPassword = null
     }
   };
 
