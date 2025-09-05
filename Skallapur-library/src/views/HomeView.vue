@@ -1,10 +1,8 @@
 <template>
-  <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="text-center">W5. Library Registration Form</h1>
-
-        <hr>
+        <h1>W5. Library Registration Form</h1>
+        <p>Let's build some more advanced features into our form.</p>
 
         <div class="form">
           <form @submit.prevent="submitForm">
@@ -77,6 +75,11 @@
               <div class="text" style="color: green;">it is great to have a friend.</div>
             </div>
 
+            <div class="mb-3">
+              <label for="reason" class="form-label">Suburb</label>
+              <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
+            </div>
+
             <div id="buttons" >
 
               <div class="text-center">
@@ -108,7 +111,6 @@
 
       </div>
     </div>
-  </div>
 
 </template>
 
@@ -124,7 +126,8 @@
       confirmPassword: '',
       isAustralian: false,
       reason: '',
-      gender: ''
+      gender: '',
+      suburb: 'Clayton'
   });
 
   const submittedCards = ref([]);
@@ -136,7 +139,8 @@
       confirmPassword: '',
       isAustralian: false,
       reason: '',
-      gender: ''
+      gender: '',
+      suburb: ''
     };
   };
 
@@ -214,32 +218,3 @@
 
 </script>
 
-<style scoped>
-  .card {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .card-header {
-  background-color: #275FDA;
-  color: white;
-  padding: 10px;
-  border-radius: 10px 10px 0 0;
-  }
-  .list-group-item {
-  padding: 10px;
-  }
-
-  /* @media (min-width: 576px) {
-    .card {
-      width: 100%;
-    }
-
-  } */
-
-  #buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-
-</style>

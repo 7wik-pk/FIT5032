@@ -11,7 +11,7 @@
       <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
       <ul>
         <li v-for="author in authors" :key="author.id">
-            {{ author.name }} ({{ author.birthYear }})
+          {{ author.name }} ({{ author.birthYear }})
         </li>
       </ul>
 
@@ -91,12 +91,10 @@
       <p>Highlighting Specific Authors:</p>
       <ul>
         <li v-for="author in authors" :key="author.id">
-          <p v-if="author.id === 2" class="highlight" style="margin: auto;">
+          <p v-if="author.id === 2" class="highlight" style="margin: auto">
             {{ author.name }} ({{ author.birthYear }})
           </p>
-          <p v-else style="margin: auto;">
-            {{ author.name }} ({{ author.birthYear }})
-          </p>
+          <p v-else style="margin: auto">{{ author.name }} ({{ author.birthYear }})</p>
         </li>
       </ul>
     </section>
